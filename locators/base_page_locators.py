@@ -7,8 +7,8 @@ class BasePageSbp:
     CLICK_ON_THE_STREET = (By.XPATH, "//li[@datatest='dropdown_list_main']")
     WRITE_THE_HOUSE = (By.XPATH, "(//input[@datatest='main_input_street_home_new'])[2]")
     CLICK_ON_THE_HOUSE = (By.XPATH, "//li[@datatest='dropdown_list_main']")
-    SELECT_CONNECTION_TYPE = (By.XPATH, "(//span[contains(text(), 'Тип подключения')])[1]")
-    CLICK_ON_CONNECTION_TYPE = (By.XPATH, "(//Li[@class='app188'])[1]")
+    SELECT_CONNECTION_TYPE = (By.XPATH, "(//input[@value='В квартиру '])[1]")
+    CLICK_ON_CONNECTION_TYPE = (By.XPATH, "(//Li[@class='app193'])[1]")
     SHOW_RATES = (By.XPATH, "(//div[contains(text(), 'показать тарифы')])[1]")
 
 
