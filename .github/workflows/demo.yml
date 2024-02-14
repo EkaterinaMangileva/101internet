@@ -25,12 +25,23 @@ jobs:
         run: python -m pip install pytest 
 
       - name: Install Selenium
-        run: pip install selenium
+        run: pip install selenium allure-pytest
 
       - name: Run tests
-        run: pytest
+        run: pytest --alluredir=allure-results && dir
 
-          
+      - name: Allure Report action from marketplace 
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        #id: allure-report
+        with:
+          allure_results: allure-results
+          #gh_pages: gh-pages
+          #allure_report: allure-report
+          allure_history: allure-history
+          keep_reports: 20
+      # - name: Generate report
+      #  run: allure generate -c allure-results -o allure-report
       
     
     
