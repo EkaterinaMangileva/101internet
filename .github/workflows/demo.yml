@@ -20,6 +20,37 @@ permissions:
 
   
 jobs:
+  download-history:
+    runs-on: ubunty-latest
+    name: Download history
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: >
+          ARTIFACT_ID=$(curl -L 
+          -H "Accept: application/vnd.github+json" 
+          -H "X-Github-Api-Version: 2022-11-28" 
+          "https://api.github.com/repos/ekaterinamangileva/101internet/actions/artifacts?name=allure-results" 
+          | python -c "import sys, json; print(json.load(sys.stdin)['artifacts'][0]['id']);") 
+          && 
+          curl -L 
+          -H "Accept: application/vnd.github+json" 
+          -H "Autorization: Bearer ${{ secrets.TOKEN }}" 
+          -H "X-GitHub-Api-Version: 2022-11-28" 
+          https://api.github.com/repos/EkaterinaMangileva/101internet/actions/artifacts/$ARTIFACT_ID/zip 
+          -o artifacts.zip
+      - run: mkdir allure-results && unzip artifacts.zip - d allure-results
+      - name: Store allure history
+        uses: actions/upload-artifact@v3
+        with:
+          name: allure-results
+          path:
+            allure-results
+          retention-days: 1
+      
+
   run-tests:
     strategy:
       fail-fast: false
@@ -29,6 +60,7 @@ jobs:
           - "3.11"
     name: Test
     runs-on: ${{ matrix.os }}
+    needs: download-history 
 
     steps:
       - name: Checkout code
@@ -42,6 +74,9 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v3
+        
       - name: first_test
         if: "github.event.inputs.deployment_target == 'first_test'"
         run: pytest -v -k test_application --alluredir=allure-results
