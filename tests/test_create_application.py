@@ -18,7 +18,7 @@ class TestOneHundredInternet:
         finally:
             bot.send_message(chat_id, "Заявки отправлены, отчет смотри здесь")
 
-    def second_test(self, driver):
+    def test_second(self, driver):
         try:
             internet_page = AddressPlaceholder(driver, "https://piter-online.net/")
             internet_page.open()
