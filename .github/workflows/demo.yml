@@ -44,12 +44,12 @@ jobs:
 
       - name: first_test
         if: "github.event.inputs.deployment_target == 'first_test'"
-        run: pytest tests/tests.py::test_application --alluredir=allure-results
+        run: pytest tests/test_create_application.py::test_application --alluredir=allure-results
         continue-on-error: true
         
       - name: second_test
         if: "github.event.inputs.deployment_target == 'second_test'"
-        run: pytest tests/tests.py::test_second_ap --alluredir=allure-results
+        run: pytest tests/test_create_application.py::test_second_ap --alluredir=allure-results
         continue-on-error: true
         
       - name: all
