@@ -17,3 +17,11 @@ class TestOneHundredInternet:
             internet_providers.create_application()
         finally:
             bot.send_message(chat_id, "Заявки отправлены, отчет смотри здесь")
+
+    def second_test(self, driver):
+        try:
+            internet_page = AddressPlaceholder(driver, "https://piter-online.net/")
+            internet_page.open()
+            internet_page.fill_in_the_address()
+        finally:
+            bot.send_message(chat_id, "Заявки отправлены, отчет смотри здесь")
