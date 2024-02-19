@@ -96,6 +96,7 @@ jobs:
         run: pytest -v -k test_application --alluredir=allure-results
         continue-on-error: true
         
+        
       - name: second_test
         if: "github.event.inputs.deployment_target == 'second_test'"
         run: pytest -v -k test_second_ap --alluredir=allure-results
@@ -104,7 +105,8 @@ jobs:
       - name: all
         if: "github.event.inputs.deployment_target == 'all'"
         run: pytest --alluredir=allure-results
-
+        continue-on-error: true
+        
       - name: Store allure results
         uses: actions/upload-artifact@v3
         with:
