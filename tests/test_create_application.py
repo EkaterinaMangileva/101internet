@@ -25,3 +25,6 @@ class TestOneHundredInternet:
             internet_page.fill_in_the_address()
         finally:
             bot.send_message(chat_id, "Заявки отправлены, отчет смотри здесь")
+
+    def test_third(self):
+        assert 1 == 2
