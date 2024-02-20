@@ -2,7 +2,7 @@ name: Demo Workflow
 
 on:
   schedule:
-    - cron: '0 5 * * *' # 8:00 MSK is 5:00 UTC
+    - cron: '5 5 * * *' # 8:05 MSK is 5:05 UTC
           
 permissions:
   contents: read
